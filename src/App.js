@@ -34,18 +34,18 @@ class App extends Component {
         }
     }
 
-    // The splitArray function takes in a number N and returns the cell array from state in subarrays with parts of N 
-    // splitArray = (subarrayLength) => {
-    //     let cellsArray = this.state.cells
-    //     let splitArray = []
-    //     let j = 3
-    //
-    //     for (let i = 0; j < cellsArray.length; i += 3) {
-    //         arrayArray.push(cellsArray.slice(i,j))
-    //         j += 3
-    //     }
-    //     return splitArray
-    // }
+    // The splitArray function takes in a number N and returns the cell array from state in subarrays with parts of N
+    splitArray = (subarrayLength) => {
+        let cellsArray = [null,null,null,null,null,null,null,null,null]
+        let splitArray = []
+        let j = 3
+
+        for (let i = 0; j <= cellsArray.length; i += 3) {
+            splitArray.push(cellsArray.slice(i,j))
+            j += 3
+        }
+        return splitArray
+    }
 
     checkHorizontal = () => {
         //make a copy of cell array

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Cell from './components/Cell'
+import './App.css';
 
-// const reset = ["","","","","","","","",""]
+
+//let reset = [null,null,null,null,null,null,null,null,null]
 
 class App extends Component {
     constructor(props){
@@ -9,6 +11,7 @@ class App extends Component {
         this.state = {
             counter: 0,
             cells : [null,null,null,null,null,null,null,null,null]
+            //gamestatus: null
         }
     }
 
@@ -27,25 +30,36 @@ class App extends Component {
           }
         )
 
-        if (xMap.includes(true) || oMap.includes(true)){
-          alert("you win")
+
+        if (xMap.includes(true)){
+          //this.setState({cells: reset, counter: 0})
+          alert("X Wins!")
+          window.location.reload(true)
+
+        } else if (oMap.includes(true)){
+          //this.setState({cells: reset, counter: 0})
+          alert("O Wins")
+          window.location.reload(true)
+
         } else if (!this.state.cells.includes(null)){
+          //this.setState({cells: reset, counter: 0})
           alert("draw")
+          window.location.reload(true)
         }
     }
 
     // The splitArray function takes in a number N and returns the cell array from state in subarrays with parts of N
-    splitArray = (subarrayLength) => {
-        let cellsArray = [null,null,null,null,null,null,null,null,null]
-        let splitArray = []
-        let j = 3
-
-        for (let i = 0; j <= cellsArray.length; i += 3) {
-            splitArray.push(cellsArray.slice(i,j))
-            j += 3
-        }
-        return splitArray
-    }
+    // splitArray = (subarrayLength) => {
+    //     let cellsArray = [null,null,null,null,null,null,null,null,null]
+    //     let splitArray = []
+    //     let j = 3
+    //
+    //     for (let i = 0; j <= cellsArray.length; i += 3) {
+    //         splitArray.push(cellsArray.slice(i,j))
+    //         j += 3
+    //     }
+    //     return splitArray
+    // }
 
     checkHorizontal = () => {
         //make a copy of cell array
@@ -66,25 +80,25 @@ class App extends Component {
     }
 
     checkVertical = () => {
-    let cellsArray = this.state.cells
+        let cellsArray = this.state.cells
 
-    //split copy into sets of 3
-    let rowOne = cellsArray.slice(0,3)
-    let rowTwo = cellsArray.slice(3,6)
-    let rowThree = cellsArray.slice(6,9)
+        //split copy into sets of 3
+        let rowOne = cellsArray.slice(0,3)
+        let rowTwo = cellsArray.slice(3,6)
+        let rowThree = cellsArray.slice(6,9)
 
-    let splitCells = []
-    splitCells.push(rowOne, rowTwo, rowThree)
+        let splitCells = []
+        splitCells.push(rowOne, rowTwo, rowThree)
 
-    let vertOne = [rowOne[0], rowTwo[0], rowThree[0]]
-    let vertTwo = [rowOne[1], rowTwo[1], rowThree[1]]
-    let vertThree = [rowOne[2], rowTwo[2], rowThree[2]]
+        let vertOne = [rowOne[0], rowTwo[0], rowThree[0]]
+        let vertTwo = [rowOne[1], rowTwo[1], rowThree[1]]
+        let vertThree = [rowOne[2], rowTwo[2], rowThree[2]]
 
-    let vertCells = []
-    vertCells.push(vertOne,vertTwo,vertThree)
+        let vertCells = []
+        vertCells.push(vertOne,vertTwo,vertThree)
 
-    return this.checker(vertCells)
-  }
+        return this.checker(vertCells)
+    }
 
     checkDiagonal = () => {
         let cellsArray = this.state.cells
@@ -114,12 +128,13 @@ class App extends Component {
     }
 
     handleClick = (index) => {
-        if (this.state.counter%2 === 0) {
-            let { counter, cells } = this.state
-            counter++ //Update counter value
-            cells[index] = "X" //Update cell array
-            this.setState({cells: cells,
-                counter: counter})
+        if (this.state.cells[index] == null){
+            if (this.state.counter%2 === 0) {
+                let { counter, cells } = this.state
+                counter++ //Update counter value
+                cells[index] = "X" //Update cell array
+                this.setState({cells: cells,
+                    counter: counter})
 
             } else {
                 let { counter, cells } = this.state
@@ -127,27 +142,40 @@ class App extends Component {
                 cells[index] = "O" //Update cell array
                 this.setState({cells: cells,
                     counter: counter})
-              }
-    }
-
-    render() {
+            }
+        }
         this.checkHorizontal()
         this.checkVertical()
         this.checkDiagonal()
+    }
+
+    render() {
 
     return (
-      <div>
+    <div>
+
+      <header className = "Title">
+            <p> Tic Tac Toe </p>
+      </header>
+
+      <div className="flex-container">
           <Cell index = {0} handleClick = {this.handleClick} label = {this.state.cells[0]}/>
           <Cell index = {1} handleClick = {this.handleClick} label = {this.state.cells[1]}/>
-          <Cell index = {2} handleClick = {this.handleClick} label = {this.state.cells[2]}/> <br/>
+          <Cell index = {2} handleClick = {this.handleClick} label = {this.state.cells[2]}/> <br/></div>
+
+      <div className="flex-container">
           <Cell index = {3} handleClick = {this.handleClick} label = {this.state.cells[3]}/>
           <Cell index = {4} handleClick = {this.handleClick} label = {this.state.cells[4]}/>
-          <Cell index = {5} handleClick = {this.handleClick} label = {this.state.cells[5]}/> <br/>
+          <Cell index = {5} handleClick = {this.handleClick} label = {this.state.cells[5]}/> <br/></div>
+
+      <div className="flex-container">
           <Cell index = {6} handleClick = {this.handleClick} label = {this.state.cells[6]}/>
           <Cell index = {7} handleClick = {this.handleClick} label = {this.state.cells[7]}/>
-          <Cell index = {8} handleClick = {this.handleClick} label = {this.state.cells[8]}/>
-      </div>
+          <Cell index = {8} handleClick = {this.handleClick} label = {this.state.cells[8]}/></div>
+
+     </div>
     )
+
   }
 }
 

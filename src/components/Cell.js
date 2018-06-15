@@ -6,7 +6,7 @@ class Cell extends Component {
   render() {
     return (
 
-          <button
+          <button className="flex-item"
           onClick = {() => {this.props.handleClick(this.props.index)}}
           type="button">
             {this.props.label}

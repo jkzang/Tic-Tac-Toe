@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -25,4 +26,47 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  display: flex;
+  flex-wrap : wrap;
+  flex-direction: row;
+
+  justify-content: center ;
+}
+
+.flex-item {
+  background: #3B653D;
+  padding: 5px;
+  min-width: 200px;
+  max-width: 200px;
+  height: 200px;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  line-height: 150px;
+  color: white;
+  font-weight: bold;
+  font-size: 6em;
+  text-align: center;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.Title {
+  text-decoration-line: underline;
+  font-size: 75px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  display: flex;
+  height: 180px;
+  justify-content: center ;
+  background: ;
+  margin: 0px;
+
+
 }
